@@ -1,1 +1,4 @@
 dockerless/config.py
+*.dll
+*.exe
+__pycache__

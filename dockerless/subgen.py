@@ -92,8 +92,11 @@ def strip_audio(filename):
 
 def run_whisper(inputwav, finalsubname):
     print("Starting whisper")
-    os.chdir("/whisper.cpp")
-    command = "./main -m models/ggml-{}.bin -of \"{}\" -t {} -p {} -osrt -f \"{}\"" .format(
+    # print(os.getcwd())
+    # # os.chdir("whisper.cpp")
+    # # print(os.getcwd())
+
+    command = "main.exe -m models/ggml-{}.bin -of \"{}\" -t {} -p {} -osrt -f \"{}\"" .format(
         whisper_model, finalsubname, whisper_threads, whisper_processors, inputwav)
     if (whisper_speedup):
         command = command.replace("-osrt", "-osrt -su")
@@ -117,9 +120,9 @@ def get_file_name(item_id, plexserver, plextoken):
     return
 
 
-if not os.path.isdir("/whisper.cpp"):
-    os.mkdir("/whisper.cpp")
-os.chdir("/whisper.cpp")
+if not os.path.isdir("./whisper.cpp"):
+    os.mkdir("./whisper.cpp")
+os.chdir("./whisper.cpp")
 subprocess.call("git clone https://github.com/ggerganov/whisper.cpp .", shell=True)
 if updaterepo:
     print("Updating repo!")
