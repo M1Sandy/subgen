@@ -8,6 +8,8 @@ import requests
 import subprocess
 from flask import Flask, request
 import xml.etree.ElementTree as ET
+
+from config import *
         
 def converttobool(in_bool):
     value = str(in_bool).lower()
@@ -16,19 +18,7 @@ def converttobool(in_bool):
     else:
         return True
 
-# parse our arguments from environment variables
-plextoken = os.getenv('PLEXTOKEN', "tokenhere")
-plexserver = os.getenv('PLEXSERVER', "http://plex:32400")
-whisper_model = os.getenv('WHISPER_MODEL', "medium")
-whisper_speedup = converttobool(os.getenv('WHISPER_SPEEDUP', "False"))
-whisper_threads = os.getenv('WHISPER_THREADS', "4")
-whisper_processors = os.getenv('WHISPER_PROCESSORS', "1")
-procaddedmedia = converttobool(os.getenv('PROCADDEDMEDIA', "True"))
-procmediaonplay = converttobool(os.getenv('PROCMEDIAONPLAY', "False"))
-namesublang = os.getenv('NAMESUBLANG', "aa")
-updaterepo = converttobool(os.getenv('UPDATEREPO', "True"))
-skipifinternalsublang = os.getenv('SKIPIFINTERNALSUBLANG', "eng")
-webhookport = os.getenv('WEBHOOKPORT', 8090)
+
 
 app = Flask(__name__)
 
