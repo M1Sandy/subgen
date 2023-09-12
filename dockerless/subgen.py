@@ -35,12 +35,9 @@ def receive_webhook():
         payload = json.loads(request.form['payload'])
     event = payload.get("event")
     if ((event == "library.new" or event == "added") and procaddedmedia) or ((event == "media.play" or event == "played") and procmediaonplay):
-        if event == "added" or event == "played":
-            print("[*] Tautulli webhook received!")
-            fullpath = payload.get("file")
-        else:
-            print("[*] Weird Webhook: [{}], ignoring . . .".format(event))
-            return ""
+        print("[*] Tautulli webhook received!")
+        fullpath = payload.get("file")
+
         
         filename = pathlib.Path(fullpath).name
         filepath = os.path.dirname(fullpath)
@@ -71,7 +68,9 @@ def receive_webhook():
         time.sleep(2)
         run_translate(fullpath, filepathnoextension)
 
-
+    else:
+        print("[*] Weird Webhook: [{}], ignoring . . .".format(event))
+        return ""
     return ""
 
 
